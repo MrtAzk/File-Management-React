@@ -1,13 +1,12 @@
 import React, { useCallback, useContext, useState } from 'react'
 
 import { FaFolder } from "react-icons/fa";
-import { FaFile } from "react-icons/fa";
 import { ViewContext } from '../context/ViewContext'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFolderQuery } from '../queries/useFolderQuery';
-import ListViewİtem from './ListViewİtem';
+import GridViewİtem from './GridViewItem';
 
-const ListView = ({ files, folders }) => {
+const GridView = ({ files, folders }) => {
 
 
 
@@ -31,7 +30,7 @@ const ListView = ({ files, folders }) => {
 
 
   return (
-    <div className='flex flex-col '>
+    <div className='flex flex-row '>
 
       <div className='border-b pb-3'>
         <input type="checkbox" onClick={bulk} />
@@ -44,13 +43,13 @@ const ListView = ({ files, folders }) => {
       </div>
       {folders?.map((f) => {
         return (
-          <ListViewİtem key={f.id} item={f}/> )
+          <GridViewİtem key={f.id} item={f}/> )
 
       })}
 
       {files?.map((f) => {
         return (
-          <ListViewİtem key={f.id} item={f}/>
+          <GridViewİtem key={f.id} item={f}/>
           )
 
       })}
@@ -60,4 +59,4 @@ const ListView = ({ files, folders }) => {
   )
 }
 
-export default ListView
+export default GridView

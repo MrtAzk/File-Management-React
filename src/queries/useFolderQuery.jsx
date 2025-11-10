@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 import { create, findById, list, remove } from '../services/backend/folderMethods'
-import { listFile, removeFile } from '../services/backend/fileMethod'
+import { createFile, listFile, removeFile } from '../services/backend/fileMethod'
 
 
 
@@ -50,6 +50,19 @@ export const useFolderQuery = (id) => {
     }
   })
 
+    const addFile = useMutation({
+    mutationFn: async (values) => {
+      console.log(values)
+      return await createFile(values)
+
+    },
+    onSuccess: ( data , values, unk2) => {
+      queryClient.invalidateQueries({
+        queryKey: ["files", { query }],
+      })
+    }
+  })
+
   const removeFolder = useMutation({
     mutationFn:async (id) => {
 
@@ -76,5 +89,5 @@ export const useFolderQuery = (id) => {
 
   })
 
-  return { findOne, findAll, addFolder, findAllFile,removeFiles ,removeFolder}
+  return { findOne, findAll, addFolder, findAllFile,removeFiles ,removeFolder,addFile}
 }

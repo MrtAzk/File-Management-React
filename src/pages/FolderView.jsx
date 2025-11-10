@@ -7,6 +7,9 @@ import { ModalContext } from '../context/ModalContext'
 import CreateFolderModal from '../modals/CreateFolderModal'
 import ListView from '../components/listView'
 import ToolBar from '../components/ToolBar'
+import PreviewImg from '../components/PreviewImg'
+import { ViewContext } from '../context/ViewContext'
+import GridView from '../components/GridView'
 
 
 const FolderView = () => {
@@ -18,6 +21,8 @@ const FolderView = () => {
     const name = (!params.id ||params.id ==="null") ? "Kök Klasör": folder.findOne.data?.name
 
     const {appear, disAppear}=useContext(ModalContext)
+
+    const { listType } = useContext(ViewContext)
 
     const handleCreateModal=()=>{
         appear({
@@ -37,7 +42,7 @@ const FolderView = () => {
 
             <TreeMenuItem name={"Kök klasör"} id={"null"} defaultExpanded={true} />
 
-        </>} content={<ListView files={folder.findAllFile.data} folders={folder.findAll.data}/>} toolbar={<ToolBar/>}/>
+        </>} content={listType ==="list" ?<ListView files={folder.findAllFile.data} folders={folder.findAll.data}/>:<GridView files={folder.findAllFile.data} folders={folder.findAll.data}/>} toolbar={<ToolBar/>} preview={<PreviewImg/>}/>
     )
 
 }

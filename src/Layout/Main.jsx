@@ -1,9 +1,10 @@
 import React from 'react'
 
 
-const Main = ({ sidebar, folderName, content, toolbar }) => {
-    
-    
+
+const Main = ({ sidebar, folderName, content, toolbar,preview }) => {
+
+
     return (
         <main className="h-screen flex">
             {/* Sidebar */}
@@ -28,11 +29,17 @@ const Main = ({ sidebar, folderName, content, toolbar }) => {
                     {toolbar}
                 </div>
 
-
-                {/* Main Content */}
-                <div className="flex-1 p-10 bg-gray-50">
-                    {content}
+                <div className='flex '>
+                    {/* Main Content */}
+                    <div className="flex-1 p-10 bg-gray-50">
+                        {content}
+                    </div>
+                    {/* Preview Content */}
+                    <div className='ml-10'>
+                        {preview}
+                    </div>
                 </div>
+
             </div>
         </main>
     )
