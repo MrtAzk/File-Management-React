@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import useBoolean from '../hooks/useBoolean'
 import { FaChevronRight } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { FaFolderOpen } from "react-icons/fa";
 import TreeMenu from './TreeMenu';
 import { useNavigate, useParams } from 'react-router-dom';
+import { ViewContext } from '../context/ViewContext';
 
 const TreeMenuItem = ({ name, id, parentId,defaultExpanded }) => {
   const isOpen = useBoolean(defaultExpanded ||false);
@@ -14,9 +15,12 @@ const TreeMenuItem = ({ name, id, parentId,defaultExpanded }) => {
 
   const params=useParams()
 
+  const {deSelectAll } = useContext(ViewContext)
+
 
   const handClick=useCallback(()=>{
     navigete("/folder/"+id)
+    deSelectAll()
   },[])
 
   const isCurrent=params.id===id
