@@ -17,26 +17,16 @@ export const ViewProvider = ({ children }) => {
         })
 
     }
-const select = (item) => {
-  console.log("Select çağrıldı:", item.name);
-  setSelectedItems((prev) => {
-    console.log("Önceki selectedItems:", prev.map(i => i.name));
-    if (prev.find((i) => i.id === item.id)) return prev;
-    const yeni = [...prev, item];
-    console.log("Yeni selectedItems:", yeni.map(i => i.name));
-    return yeni;
-  });
-};
+    const select = (item) => setSelectedItems((prev) => {
+
+        if (prev.find((i) => i.id === item.id)) return prev
+        return [...prev, item]
+    });
 
 
-const deSelect = (item) => {
-  console.log("deSelect çağrıldı:", item.name);
-  setSelectedItems((prev) => {
-    const yeni = prev.filter(i => i.id !== item.id);
-    console.log("Yeni selectedItems:", yeni.map(i => i.name));
-    return yeni;
-  });
-};
+    const deSelect = (item) => {
+        setSelectedItems((prev) => prev.filter(i => i.id !== item.id))
+    }
 
     const deSelectAll = () => {
         setSelectedItems([])
